@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<title>Diff Game</title>
+	<link rel="stylesheet" href="css/resetNormalize.css" type="text/css"/>
+	<link rel="stylesheet" href="css/style.css" type="text/css"/>
+
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/library.js"></script>
+	<script src="js/script.js"></script>
+
+</head>
+
+<body>
+
+	<main class="wrapper">
+		<div class="wrapper">
+			<header class="header">
+				<h1>Diff Game</h1>
+				<div>Find the differences in the pictures.</div>
+			</header>
+			<section class="game-block">
+				<section class="block-contest _active">
+					<div class="contest-timer-block"><span class="contest-steps"><span class="num-progress">0</span> из <span class="num-total">5</span></span> <span class="contest-timer"><span class="min">00</span>:<span class="sec">00</span></span></div>
+					<div class="contest-level-row"><span class="levels-progress">1</span>/<span class="levels-total">5</span></div>
+					<div class="btn-yellow contest-btn-reload">Начать заново</div>
+					<div class="contest-level-wrapper" data-number="10">
+						<!-- levels -->
+						<div class="contest-pic-cont contest-level active-level" data-level="6" style="visibility: inherit; opacity: 1;">
+							<img class="contest-pic" src="img/6Park.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 170px; left: 35px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 310px; left: 164px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 223px; left: 239px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 194px; left: 330px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 339px; left: 330px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 170px; left: 35px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 310px; left: 164px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 223px; left: 239px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 194px; left: 330px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 339px; left: 338px; width: 80px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 170px; left: 42px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 310px; left: 173px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 223px; left: 246px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 194px; left: 337px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 339px; left: 337px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 170px; left: 42px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 310px; left: 173px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 223px; left: 246px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 194px; left: 337px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 339px; left: 338px; width: 80px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level active-level" data-level="7" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/7VidIzOkna.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 186px; left: 152px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 306px; left: -10px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 428px; left: 121px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 133px; left: 425px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 421px; left: 435px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 186px; left: 152px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 306px; left: -10px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 428px; left: 121px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 133px; left: 425px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 421px; left: 435px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 186px; left: 152px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 306px; left: -10px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 428px; left: 121px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 133px; left: 425px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 421px; left: 435px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 186px; left: 152px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 306px; left: -10px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 428px; left: 121px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 133px; left: 425px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 421px; left: 435px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level active-level" data-level="4" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/4Centr.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 120px; left: 199px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: -4px; left: 359px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 347px; left: 122px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 305px; left: 176px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 298px; left: 335px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 120px; left: 199px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: -4px; left: 359px; width: 91px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 360px; left: 103px; width: 120px; height: 40px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 305px; left: 176px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 298px; left: 335px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 120px; left: 205px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: -4px; left: 365px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 347px; left: 127px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 305px; left: 181px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 298px; left: 340px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 120px; left: 205px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: -4px; left: 365px; width: 91px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 360px; left: 103px; width: 120px; height: 40px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 305px; left: 181px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 298px; left: 340px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level active-level" data-level="2" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/2VidIzOkna.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 4px; left: -9px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 162px; left: 58px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 294px; left: 277px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 216px; left: 300px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 134px; left: 408px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 0px; left: -9px; height: 107px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 162px; left: 58px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 294px; left: 277px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 216px; left: 300px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 134px; left: 408px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 4px; left: -5px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 162px; left: 62px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 294px; left: 281px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 216px; left: 304px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 134px; left: 412px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 0px; left: -5px; height: 107px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 162px; left: 62px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 294px; left: 281px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 216px; left: 304px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 134px; left: 412px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level active-level" data-level="10" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/10BezMachin.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 20px; left: 20px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 289px; left: 54px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 301px; left: 180px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 171px; left: 374px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 20px; left: 431px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 20px; left: 20px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 289px; left: 54px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 301px; left: 180px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 171px; left: 374px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 20px; left: 431px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 20px; left: 20px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 289px; left: 54px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 301px; left: 180px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 171px; left: 374px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 20px; left: 431px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 20px; left: 20px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 289px; left: 54px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 301px; left: 180px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 171px; left: 374px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 20px; left: 431px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level" data-level="5" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/5BezMachin.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 81px; left: 28px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 74px; left: 420px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 259px; left: 196px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 358px; left: 310px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 426px; left: 328px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 81px; left: 28px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 64px; left: 420px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 259px; left: 196px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 358px; left: 310px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 432px; left: 291px; width: 149px; height: 40px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 81px; left: 32px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 74px; left: 424px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 259px; left: 200px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 358px; left: 314px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 426px; left: 332px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 81px; left: 32px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 64px; left: 424px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 259px; left: 200px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 358px; left: 314px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 432px; left: 291px; width: 149px; height: 40px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level" data-level="3" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/3Naberegnaja.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 113px; left: 111px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 180px; left: 55px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 282px; left: 77px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 278px; left: 416px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 419px; left: 337px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 113px; left: 111px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 180px; left: 55px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 282px; left: 77px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 278px; left: 416px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 419px; left: 337px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 113px; left: 111px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 180px; left: 55px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 282px; left: 77px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 278px; left: 416px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 419px; left: 337px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 113px; left: 111px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 180px; left: 55px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 282px; left: 77px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 278px; left: 416px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 419px; left: 337px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level" data-level="1" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/1Park.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 35px; left: 228px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 286px; left: 128px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 258px; left: 285px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 315px; left: 338px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 272px; left: 442px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 35px; left: 228px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 286px; left: 128px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 258px; left: 285px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 315px; left: 338px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 272px; left: 442px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 35px; left: 232px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 286px; left: 132px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 258px; left: 289px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 315px; left: 342px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 272px; left: 446px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 35px; left: 232px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 286px; left: 132px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 258px; left: 289px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 315px; left: 342px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 272px; left: 446px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level" data-level="9" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/9Plag.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 229px; left: 115px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: -22px; left: 194px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 101px; left: 403px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 297px; left: 433px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 432px; left: 391px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 229px; left: 115px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: -22px; left: 194px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 101px; left: 403px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 297px; left: 433px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 432px; left: 391px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 229px; left: 115px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: -22px; left: 194px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 101px; left: 403px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 297px; left: 433px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 432px; left: 391px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 229px; left: 115px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: -22px; left: 194px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 101px; left: 403px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 297px; left: 433px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 432px; left: 391px; display: block;"></div>
+							</div>
+						</div>
+						<div class="contest-pic-cont contest-level" data-level="8" style="visibility: hidden; opacity: 0;">
+							<img class="contest-pic" src="img/8Centr.gif" alt="">
+							<div class="contest-area _left">
+								<div class="contest-circle-item" data-item="1" style="top: 282px; left: 11px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 166px; left: 196px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 226px; left: 264px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 105px; left: 255px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 279px; left: 307px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 282px; left: 11px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 166px; left: 196px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 226px; left: 264px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 105px; left: 255px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 279px; left: 307px; display: block;"></div>
+							</div>
+							<div class="contest-area _right">
+								<div class="contest-circle-item" data-item="1" style="top: 282px; left: 11px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="2" style="top: 166px; left: 196px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="3" style="top: 226px; left: 264px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="4" style="top: 105px; left: 255px; visibility: hidden; opacity: 0;"></div>
+								<div class="contest-circle-item" data-item="5" style="top: 279px; left: 307px; visibility: hidden; opacity: 0;"></div>
+								
+								<div class="contest-area-item" data-item="1" style="top: 282px; left: 11px; display: block;"></div>
+								<div class="contest-area-item" data-item="2" style="top: 166px; left: 196px; display: block;"></div>
+								<div class="contest-area-item" data-item="3" style="top: 226px; left: 264px; display: block;"></div>
+								<div class="contest-area-item" data-item="4" style="top: 105px; left: 255px; display: block;"></div>
+								<div class="contest-area-item" data-item="5" style="top: 279px; left: 307px; display: block;"></div>
+							</div>
+						</div>
+						<!-- / levels -->
+					</div>
+					<div class="contest-stop"></div>
+					<div class="contest-preloader"></div>
+					<div class="btn-yellow contest-btn-start" data-status="1">Старт</div>
+					<div class="btn-green contest-btn-skip" onclick="bereg.DIFF.skipLevel();">Пропустить</div>
+				</section>
+			</section>
+		</div>
+	</main>
+	
+	<div class="popup" data-popup="finish">
+		<div class="popup-inner">
+			<div class="close"></div>
+			<div class="block-title">Отлично!</div>
+			<p>Ваш результат &mdash; <b class="timer-result">00:00</b>!</p>
+			<p>Вы нашли <span class="text-cnt"></span>, теперь поделитесь <br>своим результатом с друзьями!</p>
+			<div class="share-btns">
+				<a class="btn-yellow btn-vk" href="javascript:void(0);" onclick="Share.vkontakte('http://someurl', 'Найди отличия', 'http://someurl/img/share/vk.png', 'Я нашел #cnt# за #time#.  А ты сможешь?');"><span class="und">Вконтакте</span></a>
+				<a class="btn-yellow btn-fb" href="javascript:void(0);" onclick="Share.facebook('http://someurl', 'Найди отличия', 'http://someurl/img/share/fb.png', 'Я нашел #cnt# за #time#.  А ты сможешь?');"><span class="und">Фейсбук</span></a>
+				<a class="btn-yellow btn-tw" href="javascript:void(0);" onclick="Share.twitter('http://someurl', 'Я нашел #cnt# за #time#.  А ты сможешь?');"><span class="und">Твиттер</span></a>
+			</div>
+			<div class="btn-gray btn-replay" onclick="bereg.DIFF.reloadGame();"><span class="und">Начать заново</span></div>
+		</div>
+	</div>
+	
+	<div class="popup" data-popup="no-attempts">
+		<div class="popup-inner">
+			<div class="close"></div>
+			<p>Увы, вы потратили все попытки на сегодня.</p>
+			<p>Отдохните и попробуйте завтра еще раз.</p>
+			<p>Пусть у вас всё получится!</p>
+			<div class="btn-yellow btn-ok" onclick="$(this).parents('.popup').hide();"><span class="und">Хорошо</span></div>
+		</div>
+	</div>
+
+</body>
+
+</html>
