@@ -246,7 +246,11 @@ bereg.extend("DIFF", {
 		$('.contest-btn-skip').hide();
 		//$('.popup[data-popup="finish"]').show();
 		
-		response = post({
+		$('.timer-result').html(15 + ':' + 15); // todo
+		$('.contest-timer').html('<span class="min">'+15+'</span>:<span class="sec">'+15+'</span>');
+		$('.text-cnt').html($('.popup[data-popup="finish"]').attr('data-cnt'));
+		
+		/*response = post({
 			'action':'game',
 			'status':3,
 			'token':$('.contest-btn-start').attr('data-token'),
@@ -270,7 +274,7 @@ bereg.extend("DIFF", {
 				//console.log(response.msg);
 				alert(response.msg);
 			}
-		}
+		}*/
 		
 		openPopup('finish');
 	},
@@ -415,7 +419,7 @@ bereg.extend("DIFF", {
 		//console.log($.inArray(nextLevel, this.elements.$level));
 		
 		if (nextLevel.length && nextLevel.hasClass('active-level')) {
-			response = post({
+			/*response = post({
 				'action':'game',
 				'token':$('.contest-btn-start').attr('data-token'),
 				'status':2,
@@ -431,7 +435,7 @@ bereg.extend("DIFF", {
 					console.log(response.msg);
 					alert(response.msg);
 				}
-			}
+			}*/
 			
 			this.setLevel(nextLevel.attr('data-level'));
 		} else {
@@ -457,7 +461,15 @@ bereg.extend("DIFF", {
 		if (this.score == 5) { // TODO 5 to total
 			console.log('level finished');
 			
-			response = post({
+			var nextLevel = this.elements.$area.filter("[data-item='" + id + "']").parents('.contest-level').next('.contest-level');
+			if (nextLevel.length && nextLevel.hasClass('active-level')) {
+				console.log('is next');
+				this.setLevel($(this.elements.$area).parents('.contest-level').next('.contest-level').attr('data-level'));
+			} else {
+				console.log('no next');
+				bereg.DIFF.finishGame();
+			}
+			/*response = post({
 				'action':'game',
 				'token':$('.contest-btn-start').attr('data-token'),
 				'number':$(this.elements.$area).parents('.contest-level').attr('data-level'),
@@ -479,11 +491,11 @@ bereg.extend("DIFF", {
 				} else {
 					console.log(response.msg);
 				}
-			}
+			}*/
 		} else {
 			//console.log($(this.elements.$area).parents('.contest-level').attr('data-level'));
 			
-			response = post({
+			/*response = post({
 				'action':'game',
 				'token':$('.contest-btn-start').attr('data-token'),
 				'number':$(this.elements.$area).parents('.contest-level').attr('data-level')
@@ -497,7 +509,7 @@ bereg.extend("DIFF", {
 				} else {
 					console.log(response.msg);
 				}
-			}
+			}*/
 		}
 		
 	},
