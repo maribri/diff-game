@@ -46,61 +46,52 @@ bereg.extend("DIFF", {
 		console.log('init game');
 		
 		this.elements = {};
-		this.elements.$html   = $("html");
-		this.elements.$body   = $("body");
-		this.elements.$window = $(window);
 		
 		var self = this;
-		this.timer;
-		this.timerVal = 0;
+		//this.globalScore = 0;
 		this.score = 0;
-		this.globalScore = 0;
 		this.globalLevel = 0;
+		this.timer;
+		this.timerVal = {};
+		console.log(this.timerVal);
+		this.count = {};
+		this.length = {};
 		
 		this.statusGame = {};
 		this.statusGame.show = false;
 		
-		this.object = {};
-		this.method = {};
-		this.count = {};
-		
 		this.elements.$block    = $(".block-contest");
 		this.elements.$activeLevels    = $(".contest-level");
-		/*this.elements.$images   = $(".DIFF img").filter(function() { return this.getAttribute("src").length !== 0; });
-		 this.elements.$bgImages = $(".DIFF, .DIFF *").filter(function()   { return $(this).css("backgroundImage") != "none"; });
-		 this.elements.$choiseLevel = this.elements.$block.find(".contest-level");*/
-		
 		this.elements.$progressLevel = $(".levels-progress");
 		this.elements.$totalLevel = $(".levels-total");
+		this.elements.$btnStart = $('.contest-btn-start');
+		this.elements.$btnReload = $('.contest-btn-reload');
 		
-		this.length = {};
-		/*this.length.images    = this.elements.$images.length;
-		 this.length.bgImages  = this.elements.$bgImages.length;*/
+		//this.firstStart = false;
 		
-		this.firstStart = false;
-		
-		this.elements.$block.addClass("_active")
-			.removeClass("_game");
+		this.elements.$block.addClass("_active").removeClass("_game");
 		
 		//TweenMax.set(this.elements.$block.find(".contest-level"), { autoAlpha: 0 }); todo 24 03
 		
-		if (!this.firstStart) {
-			
-			bereg.DIFF.randomizeLevels();
-			bereg.DIFF.setGame(0);
+		/*if (!this.firstStart) {
 			
 		} else {
 			
-			this.setLevel(/*bereg.levels.currentLevel*/2)
+			this.setLevel(bereg.levels.currentLevel)
 			
-		}
+		}*/
+		bereg.DIFF.randomizeLevels();
+		bereg.DIFF.setGame(0);
 		
-		$('.contest-btn-start').click(function() { bereg.DIFF.startGame() });
-		$('.contest-btn-reload').click(function() { bereg.DIFF.reloadGame() });
+		this.elements.$btnStart.click(function() { bereg.DIFF.startGame() });
+		this.elements.$btnReload.click(function() { bereg.DIFF.reloadGame() });
+		
+		//localStorage["diffGameStat"] = gGameInProgress;
 	},
 	
-	setGame: function(level) { // настраиваем игру перед началом
-		this.firstStart = true;
+	setGame: function(level) { // set game before start
+		
+		//this.firstStart = true;
 		
 		this.elements.$level = /*$(".contest-level")*/this.elements.$activeLevels;
 		this.elements.$levelCurrent = this.elements.$level[level];
@@ -131,103 +122,33 @@ bereg.extend("DIFF", {
 		
 	},
 	
-	startGame: function() { // старт игры с кнопки
+	startGame: function() { // start game with button
 		
-		//console.log('lets do it');
-		
-		if (!$('.contest-btn-start').attr('data-token')) {
-			// Check auth
-			response = post({
-				'action':'sm',
-				'auth':1
-			});
-			
-			if (response && response.responseJSON) {
-				response = response.responseJSON;
-				
-				if (response.success) {
-					//$('.game').attr('data-token', response.token);
-					$('.contest-btn-start').attr('data-token', response.token);
-				} else {
-					if (response.msg) {
-						//alert(response.msg);
-						openPopup('no-attempts');
-					} else if (response.agree) {
-						$('.popup[data-popup="agreement"]').show();
-						
-						response = post({
-							'action':'sm',
-							'auth':1
-						});
-						
-						if (response && response.responseJSON) {
-							response = response.responseJSON;
-							
-							if (response.success) {
-								//$('.game').attr('data-token', response.token);
-								$('.contest-btn-start').attr('data-token', response.token);
-							} else {
-								return;
-							}
-						}
-						
-						
-					} else {
-						$('.popup[data-popup="auth"]').show();
-					}
-					return;
-				}
-			}
-		}
+		// Check auth
 		
 		//this.elements.$totalLevel.html(this.length.level);
 		
-		$('.contest-btn-start').hide();
+		this.elements.$btnStart.hide();
 		$('.contest-preloader').hide();
-		$('.popup[data-popup="agreement"]').hide();
 		$('.contest-btn-reload').show();
 		$('.contest-btn-skip').show();
 		this.elements.$totalLevel.html(this.length.level).parent('.contest-level-row').show();
 		this.setTimer();
-		
+		//console.log(this.timerVal);
 	},
 	
-	reloadGame: function() { // рестарт игры
+	reloadGame: function() { // game restarted
 		
-		//console.log('reload');
 		//console.log('global score '+this.globalScore);
 		
 		$('.popup[data-popup="finish"]').hide();
 		bereg.DIFF.randomizeLevels();
 		
-		// Check auth
-		response = post({
-			'action':'sm',
-			'auth':1
-		});
-		
-		if (response && response.responseJSON) {
-			response = response.responseJSON;
-			
-			if (response.success) {
-				//$('.game').attr('data-token', response.token);
-				$('.contest-btn-start').attr('data-token', response.token);
-			} else {
-				if (response.msg) {
-					if (response.msg == 'Доступно только 3 попытки в сутки.') {
-						openPopup('no-attempts');
-					} else {
-						alert(response.msg);
-					}
-				} else {
-					$('.popup[data-popup="auth"]').show();
-				}
-				return;
-			}
-		}
+		// Check attempts
+		/*response.msg == 'Доступно только 3 попытки в сутки.');
+		bereg.common.openPopup('no-attempts');*/
 		
 		clearInterval(this.timer);
-		//console.log(this.elements.$level[0]);
 		var startLevel = $('.contest-level:first-child').attr('data-level');
 		
 		bereg.DIFF.setGame(startLevel);
@@ -237,7 +158,7 @@ bereg.extend("DIFF", {
 		
 	},
 	
-	finishGame: function() { // игра закончилась
+	finishGame: function() { // game finished
 		
 		console.log('win!');
 		
@@ -246,43 +167,19 @@ bereg.extend("DIFF", {
 		$('.contest-btn-skip').hide();
 		//$('.popup[data-popup="finish"]').show();
 		
-		$('.timer-result').html(15 + ':' + 15); // todo
-		$('.contest-timer').html('<span class="min">'+15+'</span>:<span class="sec">'+15+'</span>');
+		$('.timer-result').html($('.contest-timer .min').html() + ':' + $('.contest-timer .sec').html()); // todo
+		//$('.contest-timer').html('<span class="min">'+15+'</span>:<span class="sec">'+15+'</span>');
 		$('.text-cnt').html($('.popup[data-popup="finish"]').attr('data-cnt'));
 		
-		/*response = post({
-			'action':'game',
-			'status':3,
-			'token':$('.contest-btn-start').attr('data-token'),
-			'number':bereg.DIFF.globalLevel
-		});
-		
-		if (response && response.responseJSON) {
-			response = response.responseJSON;
-			
-			if (response.success) {
-				$('.popup[data-popup="finish"]').attr({
-					'data-time':response.time,
-					'data-cnt':response.cnt,
-					'data-short-url':response.short_url
-				});
-				
-				$('.timer-result').html(response.time_symbols.m + ':' + response.time_symbols.s);
-				$('.contest-timer').html('<span class="min">'+response.time_symbols.m+'</span>:<span class="sec">'+response.time_symbols.s+'</span>');
-				$('.text-cnt').html($('.popup[data-popup="finish"]').attr('data-cnt'));
-			} else {
-				//console.log(response.msg);
-				alert(response.msg);
-			}
-		}*/
-		
-		openPopup('finish');
+		//console.log(response.msg);
+		bereg.common.openPopup('finish');
 	},
 	
-	setTimer: function() { // запускаем таймер
+	setTimer: function() { // start timer
 		
 		//console.log('timer starts');
-		var timeArr = [];
+		var self = this;
+		//var timeArr = [];
 		
 		function Calcage(secs, num1, num2) {
 			s = ((Math.floor(secs / num1)) % num2).toString();
@@ -294,17 +191,19 @@ bereg.extend("DIFF", {
 		
 		var i = 0;//время в сек.
 		function time(){
-			timeArr.minutes = Calcage(i, 60, 60);
-			timeArr.seconds = Calcage(i, 1, 60);
-			$(".contest-timer .min").html(timeArr.minutes);
-			$(".contest-timer .sec").html(timeArr.seconds);//визуальный счетчик
+			self.timerVal.minutes = Calcage(i, 60, 60);
+			self.timerVal.seconds = Calcage(i, 1, 60);
+			$(".contest-timer .min").html(self.timerVal.minutes);
+			$(".contest-timer .sec").html(self.timerVal.seconds);//визуальный счетчик
 			i++;//увеличение счетчика
-			timerValue = timeArr.minutes+':'+timeArr.seconds;
+			//self.timerVal = timeArr;
+			//timerValue = timeArr.minutes+':'+timeArr.seconds;
 			//if (i > 75) { console.log('time is out'); clearInterval(timer); }
+			console.log(self.timerVal);
 		}
 		time();
 		this.timer = setInterval(time, 1000);
-		
+		console.log(this.timerVal);
 	},
 	
 	getInstance: function(holder) {
@@ -313,7 +212,7 @@ bereg.extend("DIFF", {
 		
 		var parentElement = holder;
 		
-		instance.findDifference = this.findDifference;
+		instance.rightAnswer = this.rightAnswer;
 		instance.wrongAnswer = this.wrongAnswer;
 		instance.setLevel = this.setLevel;
 		instance.skipLevel = this.skipLevel;
@@ -343,7 +242,7 @@ bereg.extend("DIFF", {
 		instance.elements.$area.off('click');
 		instance.elements.$image.off('click');
 		
-		instance.elements.$area.on('click', function(event) { instance.findDifference($(event.currentTarget).data("item")) });
+		instance.elements.$area.on('click', function(event) { instance.rightAnswer($(event.currentTarget).data("item")) });
 		
 		instance.elements.$image.on('click', function(event) { instance.wrongAnswer(event, $(event.target)) });
 		
@@ -351,7 +250,7 @@ bereg.extend("DIFF", {
 		
 	},
 	
-	setLevel: function(level) { // настраиваем уровень
+	setLevel: function(level) { // set level
 		
 		console.log('set level '+level);
 		
@@ -375,7 +274,7 @@ bereg.extend("DIFF", {
 		
 	},
 	
-	randomizeLevels: function() { // перемешиваем уровни
+	randomizeLevels: function() { // mixing levels
 		
 		console.log('randomize');
 		$('.contest-level').removeClass('active-level');
@@ -410,41 +309,23 @@ bereg.extend("DIFF", {
 		
 	},
 	
-	skipLevel: function() { // пропускаем уровень
+	skipLevel: function() { // skip level
 		
 		console.log('skip');
 		console.log('globalLevel on skip level '+bereg.DIFF.globalLevel);
 		var nextLevel = this.elements.$level.filter("[data-level='" + bereg.DIFF.globalLevel + "']").next('.contest-level');
-		if(nextLevel.hasClass('active-level')) { console.log('inArray'); } else { console.log('not inArray'); }
+		//if(nextLevel.hasClass('active-level')) { console.log('inArray'); } else { console.log('not inArray'); }
 		//console.log($.inArray(nextLevel, this.elements.$level));
 		
 		if (nextLevel.length && nextLevel.hasClass('active-level')) {
-			/*response = post({
-				'action':'game',
-				'token':$('.contest-btn-start').attr('data-token'),
-				'status':2,
-				'number':bereg.DIFF.globalLevel
-			});
-			
-			if (response && response.responseJSON) {
-				response = response.responseJSON;
-				
-				if (response.success) {
-					//
-				} else {
-					console.log(response.msg);
-					alert(response.msg);
-				}
-			}*/
-			
 			this.setLevel(nextLevel.attr('data-level'));
 		} else {
 			bereg.DIFF.finishGame();
 		}
 	},
 	
-	findDifference: function(id) { // ткнули в различие
-		
+	rightAnswer: function(id) { // ткнули в различие
+		console.log(this.timerVal);
 		this.elements.$area.filter("[data-item='" + id + "']").css("display","none");
 		TweenMax.to(this.elements.$backlight.filter("[data-item='" + id + "']"), 0.3, { autoAlpha: 1 });
 		
@@ -458,7 +339,7 @@ bereg.extend("DIFF", {
 		bereg.DIFF.globalLevel = $(this.elements.$area).parents('.contest-level').attr('data-level');
 		console.log('globalLevel on diff '+bereg.DIFF.globalLevel);
 		
-		if (this.score == 5) { // TODO 5 to total
+		if (this.score === 5) { // TODO 5 to total
 			console.log('level finished');
 			
 			var nextLevel = this.elements.$area.filter("[data-item='" + id + "']").parents('.contest-level').next('.contest-level');
@@ -469,47 +350,6 @@ bereg.extend("DIFF", {
 				console.log('no next');
 				bereg.DIFF.finishGame();
 			}
-			/*response = post({
-				'action':'game',
-				'token':$('.contest-btn-start').attr('data-token'),
-				'number':$(this.elements.$area).parents('.contest-level').attr('data-level'),
-				'status':1
-			});
-			
-			if (response && response.responseJSON) {
-				response = response.responseJSON;
-				
-				if (response.success) {
-					var nextLevel = this.elements.$area.filter("[data-item='" + id + "']").parents('.contest-level').next('.contest-level');
-					if (nextLevel.length && nextLevel.hasClass('active-level')) {
-						console.log('is next');
-						this.setLevel($(this.elements.$area).parents('.contest-level').next('.contest-level').attr('data-level'));
-					} else {
-						console.log('no next');
-						bereg.DIFF.finishGame();
-					}
-				} else {
-					console.log(response.msg);
-				}
-			}*/
-		} else {
-			//console.log($(this.elements.$area).parents('.contest-level').attr('data-level'));
-			
-			/*response = post({
-				'action':'game',
-				'token':$('.contest-btn-start').attr('data-token'),
-				'number':$(this.elements.$area).parents('.contest-level').attr('data-level')
-			});
-			
-			if (response && response.responseJSON) {
-				response = response.responseJSON;
-				
-				if (response.success) {
-					//
-				} else {
-					console.log(response.msg);
-				}
-			}*/
 		}
 		
 	},
@@ -532,148 +372,134 @@ bereg.extend("DIFF", {
 	
 });
 
-function post(data) {
-	return $.ajax({
-		type: 'POST',
-		url: '/utils/',
-		async: false,
-		data: data,
-		dataType: 'json'
-	});
-}
-
-function sm_auth_result(token) {
-	response = post({
-		'action':'sm',
-		'auth':1,
-		'token':token
-	});
+bereg.extend("common", {
 	
-	if (response && response.responseJSON) {
-		response = response.responseJSON;
+	init: function() {
 		
-		if (response.success) {
-			$('.popup[data-popup="auth"]').hide();
-			if (response.agree) {
-				$('.popup[data-popup="agreement"]').show();
-			} else {
-				bereg.DIFF.startGame();
+		this.elements = {};
+		this.elements.$html = $("html");
+		
+		var self = this;
+		
+	},
+	
+	shareIni: function(event) {
+		
+		Share = {
+			vkontakte: function(purl, ptitle, pimg, text) {
+				text = text.replace(/#cnt#/g, $('.popup[data-popup="finish"]').attr('data-cnt'));
+				text = text.replace(/#time#/g, $('.popup[data-popup="finish"]').attr('data-time'));
+				purl += '/' + $('.popup[data-popup="finish"]').attr('data-short-url');
+				
+				response = post({
+					'action':'share',
+					'token':$('.contest-btn-start').attr('data-token'),
+					'sm':'vk'
+				});
+				
+				if (response && response.responseJSON) {
+					response = response.responseJSON;
+					
+					if (response.success) {
+					} else {
+						console.log(response.msg);
+					}
+				}
+				
+				url  = 'http://vkontakte.ru/share.php?';
+				url += 'url='          + encodeURIComponent(purl);
+				url += '&title='       + encodeURIComponent(ptitle);
+				url += '&description=' + encodeURIComponent(text);
+				url += '&image='       + encodeURIComponent(pimg);
+				url += '&noparse=true';
+				Share.popup(url);
+			},
+			odnoklassniki: function(purl, text) {
+				url  = 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1';
+				url += '&st.comments=' + encodeURIComponent(text);
+				url += '&st._surl='    + encodeURIComponent(purl);
+				Share.popup(url);
+			},
+			facebook: function(purl, ptitle, pimg, text) {
+				text = text.replace(/#cnt#/g, $('.popup[data-popup="finish"]').attr('data-cnt'));
+				text = text.replace(/#time#/g, $('.popup[data-popup="finish"]').attr('data-time'));
+				purl += '/' + $('.popup[data-popup="finish"]').attr('data-short-url');
+				
+				response = post({
+					'action':'share',
+					'token':$('.contest-btn-start').attr('data-token'),
+					'sm':'fb'
+				});
+				
+				if (response && response.responseJSON) {
+					response = response.responseJSON;
+					
+					if (response.success) {
+					} else {
+						console.log(response.msg);
+					}
+				}
+				
+				if (Modernizr.mobile) {
+					url  = 'http://www.facebook.com/sharer.php?m2w&s=100';
+				} else {
+					url  = 'http://www.facebook.com/sharer.php?s=100';
+				}
+				url += '&p[title]='     + encodeURIComponent(ptitle);
+				url += '&p[summary]='   + encodeURIComponent(text);
+				url += '&p[url]='       + encodeURIComponent(purl);
+				url += '&p[images][0]=' + encodeURIComponent(pimg);
+				Share.popup(url);
+			},
+			twitter: function(purl, ptitle) {
+				ptitle = ptitle.replace(/#cnt#/g, $('.popup[data-popup="finish"]').attr('data-cnt'));
+				ptitle = ptitle.replace(/#time#/g, $('.popup[data-popup="finish"]').attr('data-time'));
+				purl += '/' + $('.popup[data-popup="finish"]').attr('data-short-url');
+				
+				response = post({
+					'action':'share',
+					'token':$('.contest-btn-start').attr('data-token'),
+					'sm':'tw'
+				});
+				
+				if (response && response.responseJSON) {
+					response = response.responseJSON;
+					
+					if (response.success) {
+					} else {
+						console.log(response.msg);
+					}
+				}
+				
+				url  = 'http://twitter.com/share?';
+				url += 'text='      + encodeURIComponent(ptitle);
+				url += '&url='      + encodeURIComponent(purl);
+				url += '&counturl=' + encodeURIComponent(purl);
+				Share.popup(url);
+			},
+			
+			popup: function(url) {
+				window.open(url,'','toolbar=0,status=0,width=626,height=436');
+				return false;
 			}
-		} else {
-			console.log(response.msg);
-			alert(response.msg);
-		}
+		};
+	
+	},
+	
+	openPopup: function(popup) {
+		
+		var popupBlock = $('.popup').filter("[data-popup='" + popup + "']");
+		var top = ($(window).height() - popupBlock.height()) / 2;
+		popupBlock.css('top', top).show();
+		
+	},
+	
+	closePopup: function(popup) {
+		
+		$(this).parents('.popup').hide();
+		
 	}
-}
-
-function shareIni(event) {
 	
-	Share = {
-		vkontakte: function(purl, ptitle, pimg, text) {
-			text = text.replace(/#cnt#/g, $('.popup[data-popup="finish"]').attr('data-cnt'));
-			text = text.replace(/#time#/g, $('.popup[data-popup="finish"]').attr('data-time'));
-			purl += '/' + $('.popup[data-popup="finish"]').attr('data-short-url');
-			
-			response = post({
-				'action':'share',
-				'token':$('.contest-btn-start').attr('data-token'),
-				'sm':'vk'
-			});
-			
-			if (response && response.responseJSON) {
-				response = response.responseJSON;
-				
-				if (response.success) {
-				} else {
-					console.log(response.msg);
-				}
-			}
-			
-			url  = 'http://vkontakte.ru/share.php?';
-			url += 'url='          + encodeURIComponent(purl);
-			url += '&title='       + encodeURIComponent(ptitle);
-			url += '&description=' + encodeURIComponent(text);
-			url += '&image='       + encodeURIComponent(pimg);
-			url += '&noparse=true';
-			Share.popup(url);
-		},
-		odnoklassniki: function(purl, text) {
-			url  = 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1';
-			url += '&st.comments=' + encodeURIComponent(text);
-			url += '&st._surl='    + encodeURIComponent(purl);
-			Share.popup(url);
-		},
-		facebook: function(purl, ptitle, pimg, text) {
-			text = text.replace(/#cnt#/g, $('.popup[data-popup="finish"]').attr('data-cnt'));
-			text = text.replace(/#time#/g, $('.popup[data-popup="finish"]').attr('data-time'));
-			purl += '/' + $('.popup[data-popup="finish"]').attr('data-short-url');
-			
-			response = post({
-				'action':'share',
-				'token':$('.contest-btn-start').attr('data-token'),
-				'sm':'fb'
-			});
-			
-			if (response && response.responseJSON) {
-				response = response.responseJSON;
-				
-				if (response.success) {
-				} else {
-					console.log(response.msg);
-				}
-			}
-			
-			if (Modernizr.mobile) {
-				url  = 'http://www.facebook.com/sharer.php?m2w&s=100';
-			} else {
-				url  = 'http://www.facebook.com/sharer.php?s=100';
-			}
-			url += '&p[title]='     + encodeURIComponent(ptitle);
-			url += '&p[summary]='   + encodeURIComponent(text);
-			url += '&p[url]='       + encodeURIComponent(purl);
-			url += '&p[images][0]=' + encodeURIComponent(pimg);
-			Share.popup(url);
-		},
-		twitter: function(purl, ptitle) {
-			ptitle = ptitle.replace(/#cnt#/g, $('.popup[data-popup="finish"]').attr('data-cnt'));
-			ptitle = ptitle.replace(/#time#/g, $('.popup[data-popup="finish"]').attr('data-time'));
-			purl += '/' + $('.popup[data-popup="finish"]').attr('data-short-url');
-			
-			response = post({
-				'action':'share',
-				'token':$('.contest-btn-start').attr('data-token'),
-				'sm':'tw'
-			});
-			
-			if (response && response.responseJSON) {
-				response = response.responseJSON;
-				
-				if (response.success) {
-				} else {
-					console.log(response.msg);
-				}
-			}
-			
-			url  = 'http://twitter.com/share?';
-			url += 'text='      + encodeURIComponent(ptitle);
-			url += '&url='      + encodeURIComponent(purl);
-			url += '&counturl=' + encodeURIComponent(purl);
-			Share.popup(url);
-		},
-		mailru: function(purl, ptitle, pimg, text) {
-			url  = 'http://connect.mail.ru/share?';
-			url += 'url='          + encodeURIComponent(purl);
-			url += '&title='       + encodeURIComponent(ptitle);
-			url += '&description=' + encodeURIComponent(text);
-			url += '&imageurl='    + encodeURIComponent(pimg);
-			Share.popup(url)
-		},
-		
-		popup: function(url) {
-			window.open(url,'','toolbar=0,status=0,width=626,height=436');
-			return false;
-		}
-	};
-}
+});
 
 $(bereg.init);

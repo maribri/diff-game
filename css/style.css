@@ -24,35 +24,17 @@ h2 { font-size: 28px; font-weight: 400; line-height: 1.18; text-transform: upper
 .btn-yellow .und { border-bottom: 1px solid #424143; }
 .btn-yellow:hover .und { border-color: #fff; }
 
-/*.btn-gray { background: #666666; color: #fff; font-weight: 400; cursor: pointer; }
+.btn-gray { background: #666666; color: #fff; font-weight: 400; cursor: pointer; }
 .btn-gray:hover { background: #01b04c; color: #fff; }
 .btn-gray._disabled { cursor: default; }
 .btn-gray .und { border-bottom: 1px solid #fff; }
 .btn-gray:hover .und { border-color: #fff; }
 
-.btn-green { background: #01B04C; color: #fff; font-weight: 400; cursor: pointer; }
+/*.btn-green { background: #01B04C; color: #fff; font-weight: 400; cursor: pointer; }
 .btn-green:hover { background: #FFCD06; color: #fff; }
 .btn-green._disabled { cursor: default; }
 .btn-green .und { border-bottom: 1px solid #01B04C; }
 .btn-green:hover .und { border-color: #fff; }*/
-
-/**************** HEADER ******************/
-
-/*.header-wrap { width: 998px; }
-.header.fixed .logo { width: 124px; }
-.home-link img { width: 100%; }
-.main-menu { padding-left: 40px; }
-.webcam-link, .webcam-link2 { width: 99px; height: 104px; }
-.top-link { height: 50px; }
-
-.promo { margin: 0 0 38px; }
-.promo-content__wrap1 { float: left; }
-.promo-nav { margin-left: 45px; }
-.promo-text { height: 325px; }*/
-
-/**************** CONTENT ******************/
-
-
 
 /**************** CONTEST ******************/
 
