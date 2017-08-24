@@ -30,12 +30,6 @@ h2 { font-size: 28px; font-weight: 400; line-height: 1.18; text-transform: upper
 .btn-gray .und { border-bottom: 1px solid #fff; }
 .btn-gray:hover .und { border-color: #fff; }
 
-/*.btn-green { background: #01B04C; color: #fff; font-weight: 400; cursor: pointer; }
-.btn-green:hover { background: #FFCD06; color: #fff; }
-.btn-green._disabled { cursor: default; }
-.btn-green .und { border-bottom: 1px solid #01B04C; }
-.btn-green:hover .und { border-color: #fff; }*/
-
 /**************** CONTEST ******************/
 
 .block-contest { position: relative; /*z-index: 950;*/ }
@@ -52,7 +46,7 @@ h2 { font-size: 28px; font-weight: 400; line-height: 1.18; text-transform: upper
 .contest-level-wrapper { position: relative; width: 100%; height: 499px; overflow: hidden; }
 .contest-level { position: absolute; top: 0; left: 0; visibility: hidden; opacity: 0; }
 
-.contest-pic-cont { /*position: relative;*/ width: 100%; height: 499px; }
+.contest-pic-cont { width: 100%; height: 499px; }
 .contest-area { position: absolute; top: 0; width: 489px; height: 499px; overflow: hidden; cursor: pointer; }
 .contest-area._left { left: 0; }
 .contest-area._right { left: 505px; width: 492px; }
@@ -62,13 +56,13 @@ h2 { font-size: 28px; font-weight: 400; line-height: 1.18; text-transform: upper
 
 .contest-cross-item { position: absolute; left: 0; top: 0; width: 72px; height: 72px; background: url('../img/icon-cross.svg') 50% 50% no-repeat; background-size: 72px auto; }
 
-.contest-preloader { /*display: none;*/ position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: url('../img/preloader.jpg') 0 0 no-repeat; }
-.contest-btn-start { /*display: none;*/ position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 218px; height: 48px; line-height: 48px; text-align: center; font-size: 24px; }
+.contest-preloader { /*display: none;*/ position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #23a382 url('../img/preloader.jpg') 0 0 no-repeat; z-index: 200; }
+.contest-btn-start { /*display: none;*/ position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 218px; height: 48px; line-height: 48px; text-align: center; font-size: 24px; z-index: 200; }
 .contest-stop { display: none; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
 
 /**************** POPUP ******************/
 
-.popup { display: none; position: fixed; left: 0; top: 35%; /*-webkit-transform: translate(0, -50%); -ms-transform: translate(0, -50%); transform: translate(0, -50%);*/ width: 100%; z-index: 990; }
+.popup { display: none; position: fixed; left: 0; top: 35%; width: 100%; z-index: 990; }
 .popup .close { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; background: url('../img/close.svg') 0 0 no-repeat; background-size: 90% auto; cursor: pointer; }
 .popup-inner { width: 715px; margin: 0 auto; position: relative; background: #fff; border: 2px solid #00b04c; font-size: 16px; line-height: 1.13; text-align: center; padding: 41px 40px; }
 .popup .close:hover { transform: scale(1.1); }
@@ -86,6 +80,7 @@ h2 { font-size: 28px; font-weight: 400; line-height: 1.18; text-transform: upper
 .share-btns .btn-fb:before { content: ''; display: inline-block; vertical-align: top; width: 22px; height: 21px; background: url('../img/fb-icon.svg') 0 0 no-repeat; background-size: auto 21px; position: relative; top: 9px; left: -1px; }
 .share-btns .btn-tw:before { content: ''; display: inline-block; vertical-align: top; width: 25px; height: 22px; background: url('../img/tw-icon.svg') 0 0 no-repeat; background-size: auto 21px; position: relative; top: 10px; left: -10px; }
 
+.share-btns a:hover { color: #fff; }
 .share-btns .btn-vk:hover:before { background-image: url('../img/vk-icon-w.svg'); }
 .share-btns .btn-fb:hover:before { background-image: url('../img/fb-icon-w.svg'); }
 .share-btns .btn-tw:hover:before { background-image: url('../img/tw-icon-w.svg'); }

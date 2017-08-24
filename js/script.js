@@ -48,12 +48,12 @@ bereg.extend("DIFF", {
 		this.elements = {};
 		
 		var self = this;
-		//this.globalScore = 0;
 		this.score = 0;
 		this.globalLevel = 0;
+		this.globalScore = 0;
+		console.log(this.globalScore);
 		this.timer;
 		this.timerVal = {};
-		console.log(this.timerVal);
 		this.count = {};
 		this.length = {};
 		
@@ -67,33 +67,18 @@ bereg.extend("DIFF", {
 		this.elements.$btnStart      = $('.contest-btn-start');
 		this.elements.$btnReload     = $('.contest-btn-reload');
 		
-		//this.firstStart = false;
-		
 		this.elements.$block.addClass("_active").removeClass("_game");
 		
-		//TweenMax.set(this.elements.$block.find(".contest-level"), { autoAlpha: 0 }); todo 24 03
-		
-		/*if (!this.firstStart) {
-			
-		} else {
-			
-			this.setLevel(bereg.levels.currentLevel)
-			
-		}*/
 		this.randomizeLevels();
 		this.setGame(0);
 		
 		this.elements.$btnStart.click(function() { self.startGame() });
 		this.elements.$btnReload.click(function() { self.reloadGame() });
-		
-		//localStorage["diffGameStat"] = gGameInProgress;
 	},
 	
 	setGame: function(level) { // set game before start
 		
-		//this.firstStart = true;
-		
-		this.elements.$level = /*$(".contest-level")*/this.elements.$activeLevels;
+		this.elements.$level = this.elements.$activeLevels;
 		this.elements.$levelCurrent = this.elements.$level[level];
 		this.elements.$area = $(".contest-area-item");
 		this.elements.$backlight = $(".contest-circle-item");
@@ -126,27 +111,18 @@ bereg.extend("DIFF", {
 		
 		// Check auth
 		
-		//this.elements.$totalLevel.html(this.length.level);
-		
 		this.elements.$btnStart.hide();
 		$('.contest-preloader').hide();
 		$('.contest-btn-reload').show();
 		$('.contest-btn-skip').show();
 		this.elements.$totalLevel.html(this.length.level).parent('.contest-level-row').show();
 		this.setTimer();
-		//console.log(this.timerVal);
 	},
 	
 	reloadGame: function() { // game restarted
 		
-		//console.log('global score '+this.globalScore);
-		
 		$('.popup[data-popup="finish"]').hide();
 		this.randomizeLevels();
-		
-		// Check attempts
-		/*response.msg == 'Доступно только 3 попытки в сутки.');
-		bereg.common.openPopup('no-attempts');*/
 		
 		clearInterval(this.timer);
 		var startLevel = $('.contest-level:first-child').attr('data-level');
@@ -165,21 +141,15 @@ bereg.extend("DIFF", {
 		clearInterval(this.timer);
 		$('.contest-preloader').show();
 		$('.contest-btn-skip').hide();
-		//$('.popup[data-popup="finish"]').show();
 		
 		$('.timer-result').html($('.contest-timer .min').html() + ':' + $('.contest-timer .sec').html()); // todo
-		//$('.contest-timer').html('<span class="min">'+15+'</span>:<span class="sec">'+15+'</span>');
-		$('.text-cnt').html($('.popup[data-popup="finish"]').attr('data-cnt'));
-		
-		//console.log(response.msg);
+		$(".text-cnt").html(this.globalScore);
 		bereg.common.openPopup('finish');
 	},
 	
 	setTimer: function() { // start timer
 		
-		//console.log('timer starts');
 		var self = this;
-		//var timeArr = [];
 		
 		function Calcage(secs, num1, num2) {
 			s = ((Math.floor(secs / num1)) % num2).toString();
@@ -196,14 +166,9 @@ bereg.extend("DIFF", {
 			$(".contest-timer .min").html(self.timerVal.minutes);
 			$(".contest-timer .sec").html(self.timerVal.seconds);//визуальный счетчик
 			i++;//увеличение счетчика
-			//self.timerVal = timeArr;
-			//timerValue = timeArr.minutes+':'+timeArr.seconds;
-			//if (i > 75) { console.log('time is out'); clearInterval(timer); }
-			console.log(self.timerVal);
 		}
 		time();
 		this.timer = setInterval(time, 1000);
-		console.log(this.timerVal);
 	},
 	
 	getInstance: function(holder) {
@@ -231,7 +196,6 @@ bereg.extend("DIFF", {
 		instance.elements.$progressItem = $(".num-progress");
 		instance.elements.$totalItem = $(".num-total");
 		
-		//instance.score = 0;
 		instance.count = 0;
 		
 		instance.total = instance.elements.$area.length / 2;
@@ -257,13 +221,11 @@ bereg.extend("DIFF", {
 		TweenMax.to(this.elements.$level.not("[data-level='" + level + "']"), 0.5, { autoAlpha: 0 });
 		TweenMax.to(this.elements.$level.filter("[data-level='" + level + "']"), 0.5, { autoAlpha: 1 });
 		
-		//this.total = this.elements.$area.length;
 		this.count = 0;
 		
 		this.countLevel = $(this.elements.$level).index($(this.elements.$level.filter("[data-level='" + level + "']"))) + 1;
 		$(".levels-progress").html(this.countLevel);
 		
-		//console.log('countlevel'+this.countLevel);
 		this.elements.$progressItem.html('0');
 		this.elements.$area.css("display","block");
 		
@@ -314,8 +276,6 @@ bereg.extend("DIFF", {
 		console.log('skip');
 		console.log('globalLevel on skip level '+this.globalLevel);
 		var nextLevel = this.elements.$level.filter("[data-level='" + this.globalLevel + "']").next('.contest-level');
-		//if(nextLevel.hasClass('active-level')) { console.log('inArray'); } else { console.log('not inArray'); }
-		//console.log($.inArray(nextLevel, this.elements.$level));
 		
 		if (nextLevel.length && nextLevel.hasClass('active-level')) {
 			this.setLevel(nextLevel.attr('data-level'));
@@ -325,7 +285,7 @@ bereg.extend("DIFF", {
 	},
 	
 	rightAnswer: function(id) { // ткнули в различие
-		console.log(this.timerVal);
+		var self = this;
 		this.elements.$area.filter("[data-item='" + id + "']").css("display","none");
 		TweenMax.to(this.elements.$backlight.filter("[data-item='" + id + "']"), 0.3, { autoAlpha: 1 });
 		
@@ -334,6 +294,8 @@ bereg.extend("DIFF", {
 		$(this.elements.$progressItem).html(this.score);
 		
 		this.count++;
+		bereg.DIFF.globalScore++;
+		console.log(bereg.DIFF.globalScore);
 		
 		console.log('right!');
 		this.globalLevel = $(this.elements.$area).parents('.contest-level').attr('data-level');
@@ -400,8 +362,7 @@ bereg.extend("common", {
 	},
 	
 	closePopup: function(popup) {
-		
-		$(this).parents(this.elements.$popup).hide();
+		$(this.elements.$popup).hide();
 		
 	}
 	
